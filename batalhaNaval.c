@@ -1,14 +1,60 @@
 #include <stdio.h>
 
-// Desafio Batalha Naval - MateCheck
-// Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
-// Siga os comentários para implementar cada parte do desafio.
-
 int main() {
-    // Nível Novato - Posicionamento dos Navios
-    // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
-    // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
-    // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
+    char linha[10] = {'A','B','C','D','E','F','G','H','I','J'};
+    int tabuleiro[10][10];
+    int i, j;
+    int tamanhoNavio = 3;
+
+    // Inicializa o tabuleiro com água (0)
+    for (i = 0; i < 10; i++)
+        for (j = 0; j < 10; j++)
+            tabuleiro[i][j] = 0;
+
+    // Coordenadas iniciais dos navios
+    int linhaH = 2, colunaH = 1; // Horizontal
+    int linhaV = 5, colunaV = 7; // Vertical
+
+    // Validação dos limites
+    if (colunaH + tamanhoNavio > 10 || linhaV + tamanhoNavio > 10) {
+        printf("Erro: navio fora dos limites!\n");
+        return 1;
+    }
+
+    // Posiciona navio horizontal
+    for (i = 0; i < tamanhoNavio; i++) {
+        if (tabuleiro[linhaH][colunaH + i] != 0) {
+            printf("Erro: sobreposição!\n");
+            return 1;
+        }
+        tabuleiro[linhaH][colunaH + i] = 3;
+    }
+
+    // Posiciona navio vertical
+    for (i = 0; i < tamanhoNavio; i++) {
+        if (tabuleiro[linhaV + i][colunaV] != 0) {
+            printf("Erro: sobreposição!\n");
+            return 1;
+        }
+        tabuleiro[linhaV + i][colunaV] = 3;
+    }
+
+    // Exibe o tabuleiro
+    printf("\n   ");
+    for (j = 0; j < 10; j++) printf("%d ", j);
+    printf("\n");
+
+    for (i = 0; i < 10; i++) {
+        printf("%c: ", linha[i]);
+        for (j = 0; j < 10; j++)
+            printf("%d ", tabuleiro[i][j]);
+        printf("\n");
+    }
+
+    return 0;
+}
+
+
 
     // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
     // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
@@ -36,5 +82,4 @@ int main() {
     // 1 1 1 1 1
     // 0 0 1 0 0
 
-    return 0;
-}
+
